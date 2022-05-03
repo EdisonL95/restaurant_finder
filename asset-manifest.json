@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/RestaurantFinder/static/css/main.073c9b0a.css",
-    "main.js": "/RestaurantFinder/static/js/main.b6206d87.js",
-    "static/js/787.aa8f963b.chunk.js": "/RestaurantFinder/static/js/787.aa8f963b.chunk.js",
-    "static/media/logo.svg": "/RestaurantFinder/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/RestaurantFinder/index.html",
-    "main.073c9b0a.css.map": "/RestaurantFinder/static/css/main.073c9b0a.css.map",
-    "main.b6206d87.js.map": "/RestaurantFinder/static/js/main.b6206d87.js.map",
-    "787.aa8f963b.chunk.js.map": "/RestaurantFinder/static/js/787.aa8f963b.chunk.js.map"
+    "main.css": "/restaurant_finder/static/css/main.073c9b0a.css",
+    "main.js": "/restaurant_finder/static/js/main.bc7563b4.js",
+    "static/js/787.aa8f963b.chunk.js": "/restaurant_finder/static/js/787.aa8f963b.chunk.js",
+    "static/media/logo.svg": "/restaurant_finder/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/restaurant_finder/index.html",
+    "main.073c9b0a.css.map": "/restaurant_finder/static/css/main.073c9b0a.css.map",
+    "main.bc7563b4.js.map": "/restaurant_finder/static/js/main.bc7563b4.js.map",
+    "787.aa8f963b.chunk.js.map": "/restaurant_finder/static/js/787.aa8f963b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.b6206d87.js"
+    "static/js/main.bc7563b4.js"
   ]
 }
