@@ -1,23 +1,91 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
-function App() {
+function App() { 
+  const API_KEY = 'AIzaSyA0Q5u_er33Is97rKEG5vAEqdAkISj_duI';
+  const [textInput, setTextInput] = useState("");
+  const [restaurantInfo, setRestaurants] = useState([]);
+  const [pageToken, setPageToken] = useState("");
+
+  function getCurrLocation()
+  {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        getRestaurant(position.coords.latitude, position.coords.longitude)
+      },
+      error => {
+        this.setState({
+          error: 'Error Getting Weather Condtions'
+        });
+      }
+    );
+  }
+
+  async function getInputLocation()
+  {
+    const encodedAddress = encodeURI(textInput)
+    try {
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${API_KEY}`);
+      const json_data = await response.json();
+      const lat = json_data.results[0].geometry.location.lat
+      const long = json_data.results[0].geometry.location.lng
+      getRestaurant(lat, long)
+    }
+    catch (e){
+      alert("Please enter a valid address")
+    }
+  }
+
+  async function getRestaurant(lat, long) {
+    const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=1500&type=restaurant&key=${API_KEY}`);
+    const json_data = await response.json();
+    const array = [];
+    setPageToken(json_data.next_page_token);
+    for (var i = 0; i < json_data.results.length; i++){
+      array.push({name: "Name: " + json_data.results[i].name, id: "\nAddress: " + json_data.results[i].vicinity, rating: "\nRating: " + json_data.results[i].rating})
+    }
+    setRestaurants(array);
+  }
+
+  async function loadMore(){
+    console.log(pageToken)
+    const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${pageToken}&key=${API_KEY}`);
+    const json_data = await response.json();
+    const array = restaurantInfo;
+    for (var i = 0; i < json_data.results.length; i++){
+      array.push({name: "Name: " + json_data.results[i].name, id: "\nAddress: " + json_data.results[i].vicinity, rating: "\nRating: " + json_data.results[i].rating})
+    }
+    setRestaurants(array);
+    setPageToken(json_data.next_page_token);
+    console.log(array)
+  }
+
+  let loadMoreButton = "";
+  if (pageToken){
+    loadMoreButton = <Button variant="primary" onClick={loadMore} id="button">Load More Restaurants</Button>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" class="body">
+      <div class="container bg-dark">
+        <header>
+          <h1>React Restaurant Finder</h1>
+        </header>
+        <span>Input location: </span> <br></br>
+        <input type="text" value = {textInput} onChange={setTextInput}></input> <br></br>
+        <Button variant="primary" onClick={getCurrLocation} id="button">Get Current Location</Button>
+      </div>
+      <div class="container bg-secondary">
+        {restaurantInfo.map((restaurant) => // Map through the items to display them in an unordered list with the description, a delete text button and an edit text button
+          <div class = "results" key={restaurant.id}>
+              {restaurant.name} <br></br>
+              {restaurant.id} <br></br>
+              {restaurant.rating}
+          </div>)}
+          {loadMoreButton}
+      </div>
     </div>
   );
 }
