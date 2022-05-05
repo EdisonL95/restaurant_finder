@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() { 
-  const API_KEY = 'AIzaSyA0Q5u_er33Is97rKEG5vAEqdAkISj_duI';
+  const API_KEY = 'A';
   const [textInput, setTextInput] = useState("");
   const [restaurantInfo, setRestaurants] = useState([]);
   const [pageToken, setPageToken] = useState("");
