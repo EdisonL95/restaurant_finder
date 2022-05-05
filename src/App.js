@@ -4,11 +4,7 @@ import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() { 
-<<<<<<< HEAD
   const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
-=======
-  const API_KEY = 'A';
->>>>>>> e8612dad1743f6cafe82d207f74f7f1cb23a43f9
   const [textInput, setTextInput] = useState("");
   const [restaurantInfo, setRestaurants] = useState([]);
   const [pageToken, setPageToken] = useState("");
