@@ -75,7 +75,7 @@ function App() {
         </header>
         <span>Input location: </span> <br></br>
         <input type="text" value = {textInput} onChange={inputChange}></input> <br></br>
-        <Button variant="primary" onClick={getCurrLocation} id="button">Get Restaurants Near Input Location</Button>
+        <Button variant="primary" onClick={getInputLocation} id="button">Get Restaurants Near Input Location</Button>
         <Button variant="primary" onClick={getCurrLocation} id="button">Get Restaurants Near Current Location</Button>
       </div>
       <div class="container bg-secondary">
