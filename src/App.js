@@ -50,7 +50,6 @@ function App() {
   }
 
   async function loadMore(){
-    console.log(pageToken)
     const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${pageToken}&key=${API_KEY}`);
     const json_data = await response.json();
     const array = restaurantInfo;
@@ -59,13 +58,14 @@ function App() {
     }
     setRestaurants(array);
     setPageToken(json_data.next_page_token);
-    console.log(array)
   }
 
   let loadMoreButton = "";
   if (pageToken){
     loadMoreButton = <Button variant="primary" onClick={loadMore} id="button">Load More Restaurants</Button>;
   }
+
+  function inputChange(event) { setTextInput(event.target.value); } 
 
   return (
     <div className="App" class="body">
@@ -74,8 +74,9 @@ function App() {
           <h1>React Restaurant Finder</h1>
         </header>
         <span>Input location: </span> <br></br>
-        <input type="text" value = {textInput} onChange={setTextInput}></input> <br></br>
-        <Button variant="primary" onClick={getCurrLocation} id="button">Get Current Location</Button>
+        <input type="text" value = {textInput} onChange={inputChange}></input> <br></br>
+        <Button variant="primary" onClick={getCurrLocation} id="button">Get Restaurants Near Input Location</Button>
+        <Button variant="primary" onClick={getCurrLocation} id="button">Get Restaurants Near Current Location</Button>
       </div>
       <div class="container bg-secondary">
         {restaurantInfo.map((restaurant) => // Map through the items to display them in an unordered list with the description, a delete text button and an edit text button
